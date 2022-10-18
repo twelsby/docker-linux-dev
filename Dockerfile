@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 
-LABEL maintainer="Michele Adduci <adduci@tutanota.com>" \
+LABEL maintainer="Trevor Welsby" \
       license="MIT"
 
 WORKDIR /project
