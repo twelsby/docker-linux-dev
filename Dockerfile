@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 LABEL maintainer="Trevor Welsby" \
       license="MIT"
@@ -22,6 +22,9 @@ RUN echo "Installing required packages " \
          && rm -rf /var/cache/apt/*
 
 ADD install_compilers.sh /install_compilers.sh
+
+RUN echo "Installing Rust" \
+         && apt install -y rust-all rustfilt
 
 RUN echo "Installing C++ Compilers" \
          && chmod +x /install_compilers.sh \
