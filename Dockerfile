@@ -36,13 +36,13 @@ ADD install_compilers.sh /install_compilers.sh
 RUN echo "Installing Rust" \
          && apt install -y rust-all rustfilt
 
-#RUN echo "Installing Rust" \
-#         && export DEBIAN_FRONTEND=noninteractive  \
-#         && apt-get update \
-#         && apt install -y rust-all rustfilt \
-#         && apt-get autoremove --purge -y \
-#         && apt-get autoclean -y \
-#         && rm -rf /var/cache/apt/*
+RUN echo "Installing Rust" \
+         && export DEBIAN_FRONTEND=noninteractive  \
+         && apt-get update \
+         && apt install -y rust-all rustfilt \
+         && apt-get autoremove --purge -y \
+         && apt-get autoclean -y \
+         && rm -rf /var/cache/apt/*
 
 RUN echo "Installing C++ Compilers" \
          && chmod +x /install_compilers.sh \
