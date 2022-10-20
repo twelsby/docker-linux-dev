@@ -27,7 +27,7 @@ RUN echo "Installing Python" \
          && add-apt-repository ppa:deadsnakes/ppa \
          && export DEBIAN_FRONTEND=noninteractive  \
          && apt-get update \
-         && apt install -y python3.6 python3.7 python3.8 \
+         && apt install -y python3 python3.7 \
          && apt-get autoremove --purge -y \
          && apt-get autoclean -y \
          && rm -rf /var/cache/apt/*
