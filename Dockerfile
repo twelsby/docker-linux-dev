@@ -25,12 +25,16 @@ ADD install_compilers.sh /install_compilers.sh
 
 RUN echo "Installing Python" \
          && add-apt-repository ppa:deadsnakes/ppa \
+         && export DEBIAN_FRONTEND=noninteractive  \
+         && apt-get update \
          && apt install -y python3.6 python3.7 python3.8 \
          && apt-get autoremove --purge -y \
          && apt-get autoclean -y \
          && rm -rf /var/cache/apt/*
 
 RUN echo "Installing Rust" \
+         && export DEBIAN_FRONTEND=noninteractive  \
+         && apt-get update \
          && apt install -y rust-all rustfilt \
          && apt-get autoremove --purge -y \
          && apt-get autoclean -y \
