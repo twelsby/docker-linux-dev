@@ -6,7 +6,8 @@ LABEL maintainer="Trevor Welsby" \
 WORKDIR /project
 
 ARG DEB_COMPILERS="g++-9 g++-10 g++-11"
-ARG EXTRA_CLANG_COMPILERS="9 10 11 12 13 14 15"
+ARG EXTRA_CLANG_COMPILERS="13 14 15"
+#ARG EXTRA_CLANG_COMPILERS="9 10 11 12 13 14 15"
 
 RUN echo "Installing required packages " \
          && export DEBIAN_FRONTEND=noninteractive  \
@@ -23,22 +24,25 @@ RUN echo "Installing required packages " \
 
 ADD install_compilers.sh /install_compilers.sh
 
-RUN echo "Installing Python" \
-         && add-apt-repository ppa:deadsnakes/ppa \
-         && export DEBIAN_FRONTEND=noninteractive  \
-         && apt-get update \
-         && apt install -y python3 python3.7 \
-         && apt-get autoremove --purge -y \
-         && apt-get autoclean -y \
-         && rm -rf /var/cache/apt/*
+#RUN echo "Installing Python" \
+#         && add-apt-repository ppa:deadsnakes/ppa \
+#         && export DEBIAN_FRONTEND=noninteractive  \
+#         && apt-get update \
+#         && apt install -y python3 python3.7 \
+#         && apt-get autoremove --purge -y \
+#         && apt-get autoclean -y \
+#         && rm -rf /var/cache/apt/*
 
 RUN echo "Installing Rust" \
-         && export DEBIAN_FRONTEND=noninteractive  \
-         && apt-get update \
-         && apt install -y rust-all rustfilt \
-         && apt-get autoremove --purge -y \
-         && apt-get autoclean -y \
-         && rm -rf /var/cache/apt/*
+         && apt install -y rust-all rustfilt
+
+#RUN echo "Installing Rust" \
+#         && export DEBIAN_FRONTEND=noninteractive  \
+#         && apt-get update \
+#         && apt install -y rust-all rustfilt \
+#         && apt-get autoremove --purge -y \
+#         && apt-get autoclean -y \
+#         && rm -rf /var/cache/apt/*
 
 RUN echo "Installing C++ Compilers" \
          && chmod +x /install_compilers.sh \
