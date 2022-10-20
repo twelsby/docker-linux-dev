@@ -24,17 +24,13 @@ RUN echo "Installing required packages " \
 
 ADD install_compilers.sh /install_compilers.sh
 
-#RUN echo "Installing Python" \
-#         && add-apt-repository ppa:deadsnakes/ppa \
-#         && export DEBIAN_FRONTEND=noninteractive  \
-#         && apt-get update \
-#         && apt install -y python3 python3.7 \
-#         && apt-get autoremove --purge -y \
-#         && apt-get autoclean -y \
-#         && rm -rf /var/cache/apt/*
-
-RUN echo "Installing Rust" \
-         && apt install -y rust-all rustfilt
+RUN echo "Installing Python" \
+         && export DEBIAN_FRONTEND=noninteractive  \
+         && apt-get update \
+         && apt install -y python3 \
+         && apt-get autoremove --purge -y \
+         && apt-get autoclean -y \
+         && rm -rf /var/cache/apt/*
 
 RUN echo "Installing Rust" \
          && export DEBIAN_FRONTEND=noninteractive  \
