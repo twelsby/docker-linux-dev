@@ -9,7 +9,7 @@ ARG DEB_COMPILERS="g++-9 g++-10 g++-11"
 ARG EXTRA_CLANG_COMPILERS="9 10 11 12 13 14 15"
 
 RUN echo "Installing required packages " \
-         && export DEBIAN_FRONTEND=noninteractive apt-get update \
+         && DEBIAN_FRONTEND=noninteractive apt-get update \
          && apt-get install -y curl \
          && curl -sL https://deb.nodesource.com/setup_16.x | bash - \
          && apt-get update \
@@ -31,7 +31,7 @@ RUN echo "Installing required packages " \
 ADD install_compilers.sh /install_compilers.sh
 
 RUN echo "Installing Python" \
-         && export DEBIAN_FRONTEND=noninteractive  \
+         && DEBIAN_FRONTEND=noninteractive  \
          && apt-get update \
          && apt install -y python3 \
          && apt-get autoremove --purge -y \
@@ -39,7 +39,7 @@ RUN echo "Installing Python" \
          && rm -rf /var/cache/apt/*
 
 RUN echo "Installing Rust" \
-         && export DEBIAN_FRONTEND=noninteractive  \
+         && DEBIAN_FRONTEND=noninteractive  \
          && apt-get update \
          && apt install -y rust-all rustfilt \
          && apt-get autoremove --purge -y \
