@@ -6,18 +6,24 @@ LABEL maintainer="Trevor Welsby" \
 WORKDIR /project
 
 ARG DEB_COMPILERS="g++-9 g++-10 g++-11"
-ARG EXTRA_CLANG_COMPILERS="13 14 15"
-#ARG EXTRA_CLANG_COMPILERS="9 10 11 12 13 14 15"
+ARG EXTRA_CLANG_COMPILERS="9 10 11 12 13 14 15"
 
 RUN echo "Installing required packages " \
-         && export DEBIAN_FRONTEND=noninteractive  \
+         && export DEBIAN_FRONTEND=noninteractive apt-get update \
+         && apt-get install -y curl \
+         && curl -sL https://deb.nodesource.com/setup_16.x | bash - \
          && apt-get update \
          && apt-get install -y \
                wget \
+               ca-certificates \
                gnupg2 \
                lsb-release \
                apt-utils \
                software-properties-common \
+               nodejs \
+               make \
+               git \
+               vim \
          && apt-get autoremove --purge -y \
          && apt-get autoclean -y \
          && rm -rf /var/cache/apt/*
