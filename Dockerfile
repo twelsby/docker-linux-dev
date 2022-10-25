@@ -51,4 +51,4 @@ RUN echo "Installing C++ Compilers" \
          && chmod +x /install_compilers.sh \
          && sh /install_compilers.sh "${DEB_COMPILERS}" "${EXTRA_CLANG_COMPILERS}"
 
-ENTRYPOINT [ "/usr/bin/bash" ]
+CMD [ "/usr/bin/bash" ]
