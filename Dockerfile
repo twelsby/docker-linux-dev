@@ -24,6 +24,7 @@ RUN echo "Installing required packages " \
                make \
                git \
                vim \
+               bash \
          && apt-get autoremove --purge -y \
          && apt-get autoclean -y \
          && rm -rf /var/cache/apt/*
@@ -50,4 +51,4 @@ RUN echo "Installing C++ Compilers" \
          && chmod +x /install_compilers.sh \
          && sh /install_compilers.sh "${DEB_COMPILERS}" "${EXTRA_CLANG_COMPILERS}"
 
-ENTRYPOINT [ "/usr/bin/g++-11" ]
+ENTRYPOINT [ "/usr/bin/bash" ]
