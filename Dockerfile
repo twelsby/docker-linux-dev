@@ -27,7 +27,7 @@ RUN echo "Installing required packages " \
                bash \
 	       cmake \
 	       clang \
-	       llvm-11 \
+	       clang-11 \
          && apt-get autoremove --purge -y \
          && apt-get autoclean -y \
          && rm -rf /var/cache/apt/*
@@ -61,6 +61,8 @@ RUN echo "Installing LLVM-CBE" \
 	 && cd build \
 	 && cmake -S .. \
 	 && make llvm-cbe \
-	 && cp tools/llvm-cbe/llvm-cbe /usr/bin
+	 && cp tools/llvm-cbe/llvm-cbe /usr/bin \
+	 && cd ../.. \
+	 && rm -rf llvm-cbe
 
 CMD [ "/usr/bin/bash" ]
