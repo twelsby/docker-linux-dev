@@ -25,6 +25,9 @@ RUN echo "Installing required packages " \
                git \
                vim \
                bash \
+	       cmake \
+	       clang \
+	       llvm-11 \
          && apt-get autoremove --purge -y \
          && apt-get autoclean -y \
          && rm -rf /var/cache/apt/*
@@ -50,5 +53,14 @@ RUN echo "Installing Rust" \
 RUN echo "Installing C++ Compilers" \
          && chmod +x /install_compilers.sh \
          && sh /install_compilers.sh "${DEB_COMPILERS}" "${EXTRA_CLANG_COMPILERS}"
+
+RUN echo "Installing LLVM-CBE" \
+         && git clone https://github.com/JuliaComputing/llvm-cbe \
+	 && cd llvm-cbe \
+         && mkdir build \
+	 && cd build \
+	 && cmake -S .. \
+	 && make llvm-cbe \
+	 && cp tools/llvm-cbe/llvm-cbe /usr/bin
 
 CMD [ "/usr/bin/bash" ]
