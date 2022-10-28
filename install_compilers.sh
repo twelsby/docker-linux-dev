@@ -17,6 +17,7 @@ echo "Installing ${CLANG_PACKAGES}"
 for version in ${CLANG_PACKAGES}
 do
     /tmp/llvm.sh $version
+    apt-get install clang-tools-$version
 done
 
 apt-get autoremove --purge -y
