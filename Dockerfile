@@ -18,6 +18,12 @@ RUN echo "Installing required packages " \
                ca-certificates \
                gnupg2 \
                lsb-release \
+	       locales \
+	       htop \
+	       man \
+	       procps \
+	       sudo \
+	       zsh \
                apt-utils \
                software-properties-common \
                nodejs \
@@ -26,14 +32,17 @@ RUN echo "Installing required packages " \
                vim \
                bash \
 	       cmake \
-	       clang \
+	       g++ \
 	       clang-11 \
-	       clang-12 \
 	       clang-tools-11 \
-	       clang-tools-12 \
          && apt-get autoremove --purge -y \
          && apt-get autoclean -y \
          && rm -rf /var/cache/apt/*
+
+# https://wiki.debian.org/Locale#Manually
+RUN sed -i "s/# en_US.UTF-8/en_US.UTF-8/" /etc/locale.gen \
+  && locale-gen
+ENV LANG=en_US.UTF-8
 
 ADD install_compilers.sh /install_compilers.sh
 
@@ -53,10 +62,6 @@ RUN echo "Installing Rust" \
          && apt-get autoclean -y \
          && rm -rf /var/cache/apt/*
 
-RUN echo "Installing C++ Compilers" \
-         && chmod +x /install_compilers.sh \
-         && sh /install_compilers.sh "${DEB_COMPILERS}" "${EXTRA_CLANG_COMPILERS}"
-
 RUN echo "Installing LLVM-CBE" \
          && git clone https://github.com/JuliaComputing/llvm-cbe \
 	 && cd llvm-cbe \
@@ -66,6 +71,17 @@ RUN echo "Installing LLVM-CBE" \
 	 && make llvm-cbe \
 	 && cp tools/llvm-cbe/llvm-cbe /usr/bin \
 	 && cd ../.. \
-	 && rm -rf llvm-cbe
+	 && rm -rf llvm-cbe \
+	 && DEBIAN_FRONTEND=noninteractive \
+	 && apt-get update \
+	 && apt install -y clang-12 clang-tools-12 \
+	 && apt-get autoremove --purge -y \
+	 && apt-get autoclean -y \
+	 && rm -rf /var/cache/apt/*
+
+
+RUN echo "Installing C++ Compilers" \
+         && chmod +x /install_compilers.sh \
+         && sh /install_compilers.sh "${DEB_COMPILERS}" "${EXTRA_CLANG_COMPILERS}"
 
 CMD [ "/usr/bin/bash" ]
