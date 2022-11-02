@@ -44,7 +44,22 @@ RUN sed -i "s/# en_US.UTF-8/en_US.UTF-8/" /etc/locale.gen \
   && locale-gen
 ENV LANG=en_US.UTF-8
 
-ADD install_compilers.sh /install_compilers.sh
+RUN echo "Installing LLVM-CBE" \
+         && git clone https://github.com/JuliaComputing/llvm-cbe \
+	 && cd llvm-cbe \
+         && mkdir build \
+	 && cd build \
+	 && cmake -S .. \
+	 && make llvm-cbe \
+	 && cp tools/llvm-cbe/llvm-cbe /usr/bin \
+	 && cd ../.. \
+	 && rm -rf llvm-cbe \
+	 && DEBIAN_FRONTEND=noninteractive \
+	 && apt-get update \
+	 && apt install -y clang-12 clang-tools-12 \
+	 && apt-get autoremove --purge -y \
+	 && apt-get autoclean -y \
+	 && rm -rf /var/cache/apt/*
 
 RUN echo "Installing Python" \
          && DEBIAN_FRONTEND=noninteractive  \
@@ -62,22 +77,7 @@ RUN echo "Installing Rust" \
          && apt-get autoclean -y \
          && rm -rf /var/cache/apt/*
 
-RUN echo "Installing LLVM-CBE" \
-         && git clone https://github.com/JuliaComputing/llvm-cbe \
-	 && cd llvm-cbe \
-         && mkdir build \
-	 && cd build \
-	 && cmake -S .. \
-	 && make llvm-cbe \
-	 && cp tools/llvm-cbe/llvm-cbe /usr/bin \
-	 && cd ../.. \
-	 && rm -rf llvm-cbe \
-	 && DEBIAN_FRONTEND=noninteractive \
-	 && apt-get update \
-	 && apt install -y clang-12 clang-tools-12 \
-	 && apt-get autoremove --purge -y \
-	 && apt-get autoclean -y \
-	 && rm -rf /var/cache/apt/*
+ADD install_compilers.sh /install_compilers.sh
 
 RUN echo "Installing C++ Compilers" \
          && chmod +x /install_compilers.sh \
