@@ -44,7 +44,7 @@ jobs:
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
 
-      - name: Build dependant workflows
+      - name: Trigger compiler-explorer
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.PAT_TOKEN }}
@@ -52,6 +52,18 @@ jobs:
             await github.rest.actions.createWorkflowDispatch({
               owner: 'twelsby',
               repo: 'compiler-explorer',
+              workflow_id: 'build.yml',
+              ref: 'master'
+            })
+
+      - name: Trigger code-server
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.PAT_TOKEN }}
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: 'twelsby',
+              repo: 'code-server',
               workflow_id: 'build.yml',
               ref: 'master'
             })
