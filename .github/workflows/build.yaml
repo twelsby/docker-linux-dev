@@ -51,7 +51,7 @@ jobs:
           script: |
             await github.rest.actions.createWorkflowDispatch({
               owner: context.repo.owner,
-              repo: 'twelsby/compiler-explorer',
+              repo: 'compiler-explorer',
               workflow_id: 'build.yml',
               ref: 'master'
             })
@@ -63,7 +63,7 @@ jobs:
           script: |
             await github.rest.actions.createWorkflowDispatch({
               owner: context.repo.owner,
-              repo: 'twelsby/code-server',
+              repo: 'code-server',
               workflow_id: 'build.yml',
               ref: 'master'
             })
