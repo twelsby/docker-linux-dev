@@ -50,7 +50,7 @@ jobs:
           github-token: ${{ secrets.PAT_TOKEN }}
           script: |
             await github.rest.actions.createWorkflowDispatch({
-              owner: 'twelsby',
+              owner: context.repo.owner,
               repo: 'compiler-explorer',
               workflow_id: 'build.yml',
               ref: 'master'
@@ -62,7 +62,7 @@ jobs:
           github-token: ${{ secrets.PAT_TOKEN }}
           script: |
             await github.rest.actions.createWorkflowDispatch({
-              owner: 'twelsby',
+              owner: context.repo.owner,
               repo: 'code-server',
               workflow_id: 'build.yml',
               ref: 'master'
