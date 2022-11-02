@@ -52,7 +52,7 @@ jobs:
             await github.rest.actions.createWorkflowDispatch({
               owner: context.repo.owner,
               repo: 'compiler-explorer',
-              workflow_id: 'build.yml',
+              workflow_id: 'build.yaml',
               ref: 'master'
             })
 
