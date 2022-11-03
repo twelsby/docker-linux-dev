@@ -1,6 +1,6 @@
 # docker-linux-cpp
 
-[![Build and Publish](https://github.com/madduci/docker-linux-cpp/actions/workflows/build.yaml/badge.svg)](https://github.com/madduci/docker-linux-cpp/actions/workflows/build.yaml)
+[![Build and Publish](https://github.com/twelsby/docker-linux-dev/actions/workflows/build.yaml/badge.svg)](https://github.com/twelsby/docker-linux-dev/actions/workflows/build.yaml)
 
 A basic docker image for developing in C++, Rust and Python, featuring the following compilers/interpreters:
 * g++ (from 9 to 11)
