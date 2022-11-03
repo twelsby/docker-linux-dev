@@ -2,7 +2,7 @@
 
 [![Build and Publish](https://github.com/madduci/docker-linux-cpp/actions/workflows/build.yaml/badge.svg)](https://github.com/madduci/docker-linux-cpp/actions/workflows/build.yaml)
 
-A basic docker image for C++ developers, featuring g++ (from 8 to 10) and clang (from 9 to 10). The default compiler is g++9, but you're free to modify the Dockerfile and set your own.
+A basic docker image for developing in C++, Rust and Python, featuring g++ (from 9 to 11) and clang (from 11 to 15). The default compiler is g++11, but you're free to modify the Dockerfile and set your own.
 
 As default working directory, `/project` is being used, but feel free to change it.
 
@@ -18,8 +18,8 @@ Since the Debian repository are changing rapidly, older versions of g++ and newe
 
 You can just type in your terminal:
 
-`docker pull madduci/docker-linux-cpp`
+`docker pull twelsby/docker-linux-dev`
 
 to use my docker image or, in case of adjustments to the `Dockerfile`, just type:
 
-`docker run --rm -it -v /your/folder:/project madduci/docker-linux-cpp my_file.cpp`
+`docker run --rm -it -v /your/folder:/project twelsby/docker-linux-dev my_file.cpp`
