@@ -6,7 +6,7 @@ LABEL maintainer="Trevor Welsby" \
 WORKDIR /project
 
 ARG DEB_COMPILERS="g++-9 g++-10 g++-11"
-ARG EXTRA_CLANG_COMPILERS="13 14 15"
+ARG EXTRA_CLANG_COMPILERS="8 9 10 16 17"
 
 RUN echo "Installing required packages " \
          && DEBIAN_FRONTEND=noninteractive apt-get update \
@@ -35,6 +35,14 @@ RUN echo "Installing required packages " \
 	       g++ \
 	       clang-11 \
 	       clang-tools-11 \
+	       clang-12 \
+	       clang-tools-12 \
+	       clang-13 \
+	       clang-tools-13 \
+	       clang-14 \
+	       clang-tools-14 \
+	       clang-15 \
+	       clang-tools-15 \
          && apt-get autoremove --purge -y \
          && apt-get autoclean -y \
          && rm -rf /var/cache/apt/*
