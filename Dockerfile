@@ -5,8 +5,8 @@ LABEL maintainer="Trevor Welsby" \
 
 WORKDIR /project
 
-ARG DEB_COMPILERS="clang-11 clang-tools-11 clang-12 clang-tools-12 clang-13 clang-tools-13 clang-14 clang-tools-14 clang-15 clang-tools-15 g++-9 g++-10 g++-11"
-ARG EXTRA_CLANG_COMPILERS="8 9 10 16"
+ARG DEB_COMPILERS="clang-11 clang-tools-11 clang-12 clang-tools-12 clang-13 clang-tools-13 clang-14 clang-tools-14 clang-15 clang-tools-15 clang-16 clang-tools-16 g++-9 g++-10 g++-11"
+ARG EXTRA_CLANG_COMPILERS="all"
 
 RUN echo "Installing required packages " \
          && DEBIAN_FRONTEND=noninteractive apt-get update \
