@@ -42,6 +42,8 @@ RUN sed -i "s/# en_US.UTF-8/en_US.UTF-8/" /etc/locale.gen \
   && locale-gen
 ENV LANG=en_US.UTF-8
 
+ADD install_compilers.sh /install_compilers.sh
+
 RUN echo "Installing clang-17" \
          && chmod +x /install_compilers.sh \
          && sh /install_compilers.sh "" "17"
@@ -78,8 +80,6 @@ RUN echo "Installing Rust" \
          && apt-get autoremove --purge -y \
          && apt-get autoclean -y \
          && rm -rf /var/cache/apt/*
-
-ADD install_compilers.sh /install_compilers.sh
 
 RUN echo "Installing C++ Compilers" \
          && chmod +x /install_compilers.sh \
